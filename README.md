@@ -18,33 +18,33 @@ To download and set up the project, follow these steps:<br>
 <code> git clone https://github.com/imhemayatsangin/CustomerApp.git</code><br>
 
 2. Navigate to the project directory:<br>
-cd your-repository<br>
+<code>cd your-repository</code><br>
 
 3. Install the PHP dependencies using Composer:<br>
-composer install<br>
+<code>composer install</code><br>
 
 4. Create a copy of the .env.example file and name it .env:<br>
-cp .env.example .env<br>
+<code> cp .env.example .env</code><br>
 
 5. Generate an application key:<br>
-php artisan key:generate<br>
+<code> php artisan key:generate</code><br>
 
 6. Configure the database connection in the .env file. Set the appropriate values for your database server:<br>
-DB_CONNECTION=mysql<br>
+<code>DB_CONNECTION=mysql<br>
 DB_HOST=127.0.0.1<br>
 DB_PORT=3306<br>
 DB_DATABASE=your_database_name<br>
 DB_USERNAME=your_database_username<br>
-DB_PASSWORD=your_database_password<br>
+DB_PASSWORD=your_database_password</code><br>
 
 7. Run the database migrations to create the necessary tables:<br>
-php artisan migrate<br>
+<code>php artisan migrate</code><br>
 
 8. Install the JavaScript dependencies using NPM:<br>
-npm install<br>
+<code>npm install</code><br>
 
 # Usage<br>
 To run the project locally, execute the following command:<br>
-php artisan serve<br>
+<code>php artisan serve<br></code>
 This will start a development server at http://localhost:8000, and you can access the application in your web browser.<br>
 # Enjoy the show.<br>
