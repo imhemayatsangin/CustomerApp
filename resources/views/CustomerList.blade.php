@@ -11,7 +11,13 @@
                     <h2>Customers Directory</h2>
                 </div>
                 <div class="card-body">
-               
+
+                        @if (session()->has('message'))
+                            <div class="alert alert-success">
+                                {{ session('message') }}
+                            </div>
+                        @endif
+
                     @livewire('customers')  {{-- calling the render function which is in Http.Livewire.Customer and then it displays the view  --}}
 
                 </div>

@@ -5,18 +5,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Customer APP</title>
-        <script src="{{ asset('js/app.js') }}" defer></script>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-  
+        <link href="{{ asset('build/assets/app-e3b0c442.css') }}" rel="stylesheet">
 
-
-
-        @livewireStyles
  
-        <style>
+  
+  <!--  CDN links for jQuery and Bootstrap -->
 
-        </style>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+@livewireStyles
+
     </head>
     <body >
 
@@ -44,12 +41,18 @@
         <div class="container">
             @yield('content')
         </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-
-       
-
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
         @livewireScripts
+   
+      
+        
+
+        <script src="{{ asset('build/assets/app-0d91dc04.js') }}"></script>
+
+  
+        @stack('scripts')
+    
     </body>
 </html>
