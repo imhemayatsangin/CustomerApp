@@ -49,7 +49,7 @@
                          
                             <td>
                             <button data-toggle="modal" data-target="#updateModal" wire:click="edit({{ $customer->id }})" class="btn btn-primary btn-sm">Edit</button>
-                            <button wire:click="delete({{ $customer->id }})" class="btn btn-danger btn-sm">Delete</button>
+                            <button data-toggle="modal" data-target="#deleteModal" wire:click="delete({{ $customer->id }})" class="btn btn-danger btn-sm">Delete</button>
                             </td>
                         </tr>
                         @endforeach
@@ -165,6 +165,28 @@
                                 <button type="button" wire:click.prevent="cancel()" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <button type="button" wire:click.prevent="updateCustomer()" class="btn btn-primary" >Save changes</button>
                             </div>
+                    </div>
+                    </div>
+                </div>
+
+
+                <!-- Delete Modal -->
+                <div wire:ignore.self class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Delete Confirmation</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                        <p>Are you sure you want to delete this record?</p>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button"  class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" wire:click="deleteRecord({{ $customer_id }})" class="btn btn-danger" data-dismiss="modal">Delete</button>
+                        </div>
                     </div>
                     </div>
                 </div>

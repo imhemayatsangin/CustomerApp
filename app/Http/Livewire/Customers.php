@@ -11,7 +11,7 @@ class Customers extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-
+    public $deleteConfirmation = false;
     public $customer_id;
     public $update_flag = false;
     public $name, $surname, $birth_date, $tel, $address;
@@ -26,9 +26,6 @@ class Customers extends Component
         'birth_date' => 'required',
         'tel' => 'required',
         'address' => 'required',
-
-
-
     ];
 
     public function updated($propertyName)
@@ -140,6 +137,23 @@ class Customers extends Component
             $this->update_flag = false;
             session()->flash('message', 'Customer info Updated Successfully.');
             $this->resetInputFields();
+        }
+    }
+
+
+    public function delete($id)
+    {
+        $customer = Customer::where('id', $id)->first();
+
+        $this->customer_id = $customer->id;
+    }
+
+
+    public function deleteRecord($id)
+    {
+        if ($id) {
+            Customer::where('id', $id)->delete();
+            session()->flash('message', 'Customer info deleted successfully.');
         }
     }
 }
