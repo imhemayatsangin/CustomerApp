@@ -10,10 +10,13 @@ class Customers extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
-    public $search;
 
+    public $search;
+    public $customer_id;
+    public $update_flag = false;
 
     public $name, $surname, $birth_date, $tel, $address;
+    public $edit_name, $edit_surname, $edit_birth_date, $edit_tel, $edit_address;
 
 
     protected $rules = [
@@ -23,16 +26,18 @@ class Customers extends Component
         'tel' => 'required',
         'address' => 'required',
 
+
+
     ];
 
-    // public function updated($propertyName)
-    // {
-    //     $this->validateOnly($propertyName);
-    // }
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
 
     public function render()
     {
-        $customers = Customer::all();
+        $customers = Customer::paginate(10);
         return view('livewire.customers', ['customers' => $customers]);
     }
 
@@ -49,6 +54,11 @@ class Customers extends Component
         $this->birth_date = '';
         $this->tel = '';
         $this->address = '';
+        $this->edit_name = '';
+        $this->edit_surname = '';
+        $this->edit_birth_date = '';
+        $this->edit_tel = '';
+        $this->edit_address = '';
     }
     public function closeModal()
     {
@@ -75,5 +85,43 @@ class Customers extends Component
         $this->resetInputFields();
 
         $this->dispatchBrowserEvent('close-modal');
+    }
+
+    public function cancel()
+    {
+        $this->update_flag = false;
+        $this->resetInputFields();
+    }
+    public function edit($id)
+    {
+        $this->update_flag = true;
+        $customer = Customer::where('id', $id)->first();
+
+        $this->customer_id = $id;
+        $this->edit_name = $customer->name;
+        $this->edit_surname = $customer->surname;
+        $this->edit_birth_date = $customer->birth_date;
+        $this->edit_tel = $customer->tel;
+        $this->edit_address = $customer->address;
+    }
+
+    public function updateCustomer()
+    {
+        $validatedData = $this->validate([
+            'edit_name' => 'required|min:2',
+            'edit_surname' => '',
+            'edit_birth_date' => 'required',
+            'edit_tel' => 'required',
+            'edit_address' => 'required',
+        ]);
+
+        if ($this->customer_id) {
+            $customer = Customer::find($this->customer_id);
+            $customer->update($validatedData);
+
+            $this->update_flag = false;
+            session()->flash('message', 'Customer info Updated Successfully.');
+            $this->resetInputFields();
+        }
     }
 }

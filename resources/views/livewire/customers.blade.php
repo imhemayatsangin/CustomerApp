@@ -59,13 +59,14 @@
                     
                     </tbody>
                 </table>
-                
+                <div class="mt-4">{{ $customers->links() }} </div>
             </div>
 
             <!-- Modal -->
             <!--adding data Modal -->
         <div wire:ignore.self class="modal fade"  id="addingmodal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl">
+          
+                <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Add Customer</h5>
@@ -116,6 +117,55 @@
                 </div>
             </div>
         </div>
+
+
+                        <!-- Update Modal -->
+                <div wire:ignore.self class="modal fade" data-backdrop="static" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Update Customer</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlInput1">Name</label>
+                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter your Name" wire:model="edit_name">
+                                        @error('edit_name') <span class="text-danger error">{{ $message }}</span>@enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlInput2">Surname</label>
+                                        <input type="text" class="form-control" id="exampleFormControlInput2" wire:model="edit_surname" placeholder="Enter your surname">
+                                        @error('edit_surname') <span class="text-danger error">{{ $message }}</span>@enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlInput2">Telephone</label>
+                                        <input type="text" class="form-control" id="exampleFormControlInput2" wire:model="edit_tel" placeholder="Enter your telephone number">
+                                        @error('edit_tel') <span class="text-danger error">{{ $message }}</span>@enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlInput2">Date of Birth</label>
+                                        <input type="date" class="form-control" id="exampleFormControlInput2" wire:model="edit_birth_date" >
+                                        @error('edit_birth_date') <span class="text-danger error">{{ $message }}</span>@enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlInput2">Address</label>
+                                        <textarea class="form-control" wire:model="edit_address" id="address" rows="3" placeholder="Enter your address"></textarea>
+                                        @error('edit_address') <span class="text-danger error">{{ $message }}</span>@enderror
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" wire:click.prevent="cancel()" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" wire:click.prevent="updateCustomer()" class="btn btn-primary" >Save changes</button>
+                            </div>
+                    </div>
+                    </div>
+                </div>
+
 </div>
 
 @push('scripts')
