@@ -11,14 +11,15 @@ class Customers extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    public $search;
+
     public $customer_id;
     public $update_flag = false;
-
     public $name, $surname, $birth_date, $tel, $address;
     public $edit_name, $edit_surname, $edit_birth_date, $edit_tel, $edit_address;
-
-
+    public $search;
+    protected $queryString = [
+        'search' => ['except' => ''],
+    ];
     protected $rules = [
         'name' => 'required|min:2',
         'surname' => '',
@@ -37,8 +38,25 @@ class Customers extends Component
 
     public function render()
     {
-        $customers = Customer::paginate(10);
+        $customers = Customer::when($this->search, function ($query) {
+            return $query->where(function ($query) {
+                $query->where('name', 'like', '%' . $this->search . '%')
+                    ->orWhere('surname', 'like', '%' . $this->search . '%')
+                    ->orWhere('address', 'like', '%' . $this->search . '%')
+                    ->orWhere('tel', 'like', '%' . $this->search . '%')
+                    ->orWhere('birth_date', 'like', '%' . $this->search . '%');
+            });
+        })->paginate(10);
         return view('livewire.customers', ['customers' => $customers]);
+    }
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+    public function refreshpage()
+    {
+        $this->search = '';
+        $this->resetPage();
     }
 
     public function addTypeModal()

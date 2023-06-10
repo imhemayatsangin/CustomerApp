@@ -8,7 +8,10 @@
     @endif
             <div class="row justify-content-between">
                     <div class="col-auto">
-                        <input type="text" class="form-control" placeholder="Search">
+                        <div class="input-group">
+                            <input type="text" class="form-control" wire:model="search" id="search-input" placeholder="Search">
+                            <button class="btn btn-outline-secondary" wire:click="refreshpage" id="clear-search" type="button">&times;</button>
+                          </div>
                     </div>
                     <div class="col-auto">
                     
@@ -178,6 +181,7 @@
       window.addEventListener('show-addingmodal', event =>{
           $('#addingmodal').modal('show');
       });
+
 
 </script>
 
