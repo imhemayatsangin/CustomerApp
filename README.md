@@ -15,7 +15,7 @@ NPM (Node Package Manager)<br>
 To download and set up the project, follow these steps:<br>
 
 1. Clone the repository to your local machine using the following command:<br>
-git clone https://github.com/imhemayatsangin/CustomerApp.git<br>
+<code> git clone https://github.com/imhemayatsangin/CustomerApp.git</code><br>
 
 2. Navigate to the project directory:<br>
 cd your-repository<br>
