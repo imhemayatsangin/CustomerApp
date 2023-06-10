@@ -32,6 +32,30 @@
                         </tr>
                     </thead>
                     <tbody>
+
+                        @if ($customers->count()>0)
+
+                        @foreach ( $customers as $customer)
+                        <tr>
+                            <td>{{ $customer->id }}</td>
+                            <td>{{ $customer->name }}</td>
+                            <td>{{ $customer->surname }}</td>
+                            <td>{{ $customer->tel }}</td>
+                            <td>{{ $customer->birth_date }}</td>
+                            <td>{{ $customer->address }}</td>
+                         
+                            <td>
+                            <button data-toggle="modal" data-target="#updateModal" wire:click="edit({{ $customer->id }})" class="btn btn-primary btn-sm">Edit</button>
+                            <button wire:click="delete({{ $customer->id }})" class="btn btn-danger btn-sm">Delete</button>
+                            </td>
+                        </tr>
+                        @endforeach
+                            @else
+                            <tr>
+                                <td colspan="4" style="text-align: center">No Records...</td>
+
+                            </tr>
+                        @endif
                     
                     </tbody>
                 </table>
@@ -87,8 +111,7 @@
                             Save changes
                         </button>
 
-                    
-
+                
                     </div>
                 </div>
             </div>
